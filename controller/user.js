@@ -9,7 +9,7 @@ export const loginUser = TryCatch(async (req, res) => {
 
   const subject = "Ecommerce App";
 
-  const otp = Math.floor(Math.random() * 1000000);
+  const otp = Math.floor(100000 + Math.random() * 900000);
 
   const prevOtp = await OTP.findOne({
     email,

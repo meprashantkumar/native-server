@@ -174,7 +174,7 @@ export const newOrderOnline = async (req, res) => {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.Frontend_Url}/ordersuccess?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.Frontend_Url}/order-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.Frontend_Url}/cart`,
       metadata: {
         userId: req.user._id.toString(),
