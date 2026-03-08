@@ -7,6 +7,8 @@ import axios from "axios";
 
 dotenv.config();
 
+await connectDb();
+
 cloudinary.v2.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
@@ -36,5 +38,4 @@ app.use("/api", orderRoutes);
 
 app.listen(port, () => {
   console.log(`server is running on http://localhost:${port}`);
-  connectDb();
 });
