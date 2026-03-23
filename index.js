@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import connectDb from "./utils/db.js";
 import cloudinary from "cloudinary";
 import cors from "cors";
-import axios from "axios";
 
 dotenv.config();
 
