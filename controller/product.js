@@ -47,7 +47,7 @@ export const createProduct = TryCatch(async (req, res) => {
 });
 
 export const getAllProducts = TryCatch(async (req, res) => {
-  const { search, category, page, sortByPrice } = req.query;
+  const { search, category, sortByPrice } = req.query;
 
   const filter = {};
 
@@ -62,10 +62,6 @@ export const getAllProducts = TryCatch(async (req, res) => {
     filter.category = category;
   }
 
-  const limit = 8;
-
-  const skip = (page - 1) * limit;
-
   let sortOption = { createdAt: -1 };
 
   if (sortByPrice) {
@@ -76,20 +72,11 @@ export const getAllProducts = TryCatch(async (req, res) => {
     }
   }
 
-  const products = await Product.find(filter)
-    .sort(sortOption)
-    .limit(limit)
-    .skip(skip);
+  const products = await Product.find(filter).sort(sortOption);
 
   const categories = await Product.distinct("category");
 
-  const newProduct = await Product.find().sort("-createdAt").limit(4);
-
-  const countProduct = await Product.countDocuments();
-
-  const totalPages = Math.ceil(countProduct / limit);
-
-  res.json({ products, categories, totalPages, newProduct });
+  res.json({ products, categories });
 });
 
 export const getSingleProduct = TryCatch(async (req, res) => {
